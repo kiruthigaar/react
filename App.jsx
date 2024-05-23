@@ -7,7 +7,7 @@ import DoctorsList from './components/admin/DoctorsList'
 import CreateDoctor from './components/admin/CreateDoctor';
 import axios from 'axios';
 import PatientsList from './components/admin/PatientsList';
-import CreatePatients from './components/patients/CreatePatient';
+
 import HomePage from './components/homepage/HomePage';
 import MakeAppointment from './components/homepage/MakeAppointment';
 import AdminLogin from './components/admin/AdminLogin';
@@ -21,6 +21,15 @@ import HomeNav from './components/homepage/HomeNav';
 import PhoneVerification from './components/homepage/PhoneVerification';
 import PatientDetails from './components/homepage/PatientDetails';
 import BookingSlot from './components/homepage/BookingSlot';
+import { store } from './components/store.js'
+import {Provider} from 'react-redux'
+import Sidemenu from './components/homepage/Sidemenu.jsx';
+import PatientLogin from './components/patient/PatientLogin.jsx';
+import Ourdoctor from './components/homepage/Ourdoctor.jsx';
+import PatientLoginPage from './components/patient/PatientLoginPage.jsx';
+
+import A from './components/patient/A.jsx'
+import Appointment from './components/admin/Appointment.jsx';
 
 
 function App() {
@@ -47,23 +56,18 @@ function App() {
   const [DOB ,setDob] = useState('')
   const [bloodgroup ,setBloodgroup] = useState('')
 
-  // const handleSumbit = (e) => {
-  //   e.preventDefault()
-  //   console.log(name)
-  
-  // let addDoctor = {name ,gender, qualification ,department, experience, email,contact, consultancy_fee : consultancyfee}
-
-  //       axios.post('http://127.0.0.1:4000/doctor/',addDoctor)
-  //       .then(response => console.log(response.data))
-  //       .catch(error => console.log(error))
-  //       navigate('/admin/login/doctors/')
-  // }
+ 
   return (
+    <Provider store = {store}>
     <>
     <div >
       <Routes>
+        <Route path="/ourdoctor/" element = {<Ourdoctor />}></Route>
+        <Route path="/patientlogin/" element = {<PatientLogin />}></Route>
+        <Route path="/sidemenu/" element = {<Sidemenu />}></Route>
         <Route path="/admin/" element = {<AdminLogin />}></Route>
         <Route path="/admin/loginpage/" element = {<AdminPage />}></Route>
+        <Route path="/admin/loginpage/appointment" element = {<Appointment />}></Route>
         <Route path="/admin/loginpage/doctorslist/" element = {<DoctorsList />}></Route>
         <Route path="/admin/loginpage/createdoctor/" element = {<CreateDoctor 
                                                                 name = {name}
@@ -97,7 +101,8 @@ function App() {
                                                                 setPatientemail = {setPatientemail}
                                                                 setAddress = {setAddress}
                                                                 setDob = {setDob}
-                                                                setBloodgroup = {setBloodgroup}/>}></Route>
+                                                                setBloodgroup = {setBloodgroup}
+                                                                />}></Route>
         <Route path = "/admin/loginpage/editdoctor/:id/" element = {<EditDoctor 
                                                                     name = {name}
                                                                     gender = {gender}
@@ -121,8 +126,26 @@ function App() {
         <Route path="/aboutus/" element = {<AboutUs />}></Route> 
         <Route path="/homenav/" element = {<HomeNav />}></Route>
         <Route path="/phoneverification/" element = {<PhoneVerification />}></Route>
-        <Route path="/patientdetails/" element = {<PatientDetails />}></Route> 
-        <Route path="/bookingslot/" element = {<BookingSlot />}></Route> 
+        <Route path="/patientdetails/" element = {<PatientDetails 
+                                                            patientname = {patientname}
+                                                            patientgender = {patientgender}
+                                                            mobile = {mobile}
+                                                            patientemail = {patientemail}
+                                                            address = {address}
+                                                            DOB = {DOB}
+                                                            bloodgroup = {bloodgroup}
+                                                            setPatientName = {setPatientName}
+                                                            setPatientgender = {setPatientgender}
+                                                            setMobile = {setMobile}
+                                                            setPatientemail = {setPatientemail}
+                                                            setAddress = {setAddress}
+                                                            setDob = {setDob}
+                                                            setBloodgroup = {setBloodgroup}
+                                                            />}></Route> 
+        <Route path="/bookingslot/:id" element = {<BookingSlot />}></Route> 
+        <Route path="/patientlogin/" element = {<PatientLogin />}></Route>
+        <Route path="/patientloginpage/:id" element = {<PatientLoginPage />}></Route>
+        <Route path="/abc/" element = {<A />}></Route>
         {/* <Route path="/admin/loginpage/'" element = {<AdminNav />}></Route>
         <Route path = '/admin/login/doctors/' element = {<DoctorsList 
                                                               doctors = {doctors}
@@ -173,6 +196,7 @@ function App() {
       </Routes>
       </div>
     </>
+    </Provider>
   )
 }
 
