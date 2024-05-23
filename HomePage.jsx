@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col';
 import Contactus from './Contactus';
 import AboutUs from './AboutUs';
 import HomeNav from './HomeNav';
+import Sidemenu from './Sidemenu';
+import Ourdoctor from './Ourdoctor';
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -21,9 +23,14 @@ const HomePage = () => {
   }
   return (
   <>
+   
       <Row style = {{backgroundColor : "#c2d1c6"}}>
         <Col style = {{padding : "30px"}}>
           <h5 style = {{textAlign : "center"}}>KPNR Medical Centre and Hospital</h5>
+        </Col>
+        {/* <Col md="auto">Variable width content</Col> */}
+        <Col xs lg="2" style = {{padding : "23px"}}> 
+          <Sidemenu />
         </Col>
       </Row>
       <Row>
@@ -37,6 +44,9 @@ const HomePage = () => {
             <CarouselImage />
           </Container>
         </Col>
+      </Row>
+      <Row>
+        <Ourdoctor />
       </Row>
       <Row>
         <AboutUs />
